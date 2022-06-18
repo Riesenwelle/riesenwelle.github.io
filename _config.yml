@@ -5,15 +5,16 @@
 # Site
 title: 测试用个人博客
 subtitle: '2190400403陈逸潇'
-description: ''
+description: '描述五个字'
 keywords:
 author: 2190400403陈逸潇
-language: zh
-timezone: ''
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://121.36.87.89/
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
