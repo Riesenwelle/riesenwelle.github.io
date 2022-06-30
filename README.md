@@ -1,3 +1,3 @@
 # riesenwelle.github.io
 
-## Just a personal blog
+Just a personal blog.
