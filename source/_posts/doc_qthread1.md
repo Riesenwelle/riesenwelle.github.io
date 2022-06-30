@@ -5,7 +5,9 @@ tags:
     - Qt
     - Qthread
     - 多线程
-categoires: Qt
+    - C++
+categories: 
+    - Qt
 ---
 
 ### Qt中通过继承QThread并重写run()方法的方式实现多线程代码的编写。
