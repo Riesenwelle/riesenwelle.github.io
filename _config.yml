@@ -122,5 +122,7 @@ theme: next
 deploy:
   type: git
   # repo: git@121.36.87.89:/var/repo/hexo.git
-  repo: git@github.com:Riesenwelle/riesenwelle.github.io.git
+  repo: 
+    github: git@github.com:Riesenwelle/riesenwelle.github.io.git
+    # coding: git@e.coding.net:riesenwelle/riesenwelle/riesenwelle.github.io.git
   branch: master
