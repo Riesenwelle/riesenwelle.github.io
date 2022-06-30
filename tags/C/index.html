@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>标签: C++ | Riesenwelle的博客</title>
+  <title>标签: C | Riesenwelle的博客</title>
   
 
 
@@ -173,7 +173,7 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <h2 class="collection-header">C++
+        <h2 class="collection-header">C
           <small>标签</small>
         </h2>
       </div>
@@ -188,35 +188,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2022-06-30T10:20:44+08:00"
+              datetime="2022-06-30T12:10:47+08:00"
               content="2022-06-30">
           06-30
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2022/06/30/doc_imbedded_cashier/" itemprop="url">
-            <span itemprop="name">基于IMX6的嵌入式收银系统</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-06-29T12:03:25+08:00"
-              content="2022-06-29">
-          06-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/29/doc_qthread1/" itemprop="url">
-            <span itemprop="name">QThread多线程简单实例</span>
+          <a class="post-title-link" href="/2022/06/30/doc_simpleSerial/" itemprop="url">
+            <span itemprop="name">【转载】简易 Linux C 单文件串口通信</span>
           </a>
       </div>
 
@@ -268,12 +248,10 @@
   </div>
 
   <aside class="sidebar">
-
     <div id="music163player1">
       <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1391211269&auto=0&height=66">
       </iframe>
     </div>
-
     <div id="music163player2">
       <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1476480358&auto=0&height=66">
       </iframe>
@@ -371,6 +349,7 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -383,6 +362,65 @@
 
 
 <script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
 
 
 
@@ -403,6 +441,7 @@
 
 
 
+    <div id="pjax">
   
 
   
@@ -436,6 +475,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
 });
 </script>
 
+    </div>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
