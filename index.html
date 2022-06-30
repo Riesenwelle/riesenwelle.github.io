@@ -170,6 +170,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://121.36.87.89/2022/06/30/doc_simpleSerial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Riesenwelle">
+      <meta itemprop="description" content="Design,Create,Realization">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Riesenwelle的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/30/doc_simpleSerial/" class="post-title-link" itemprop="url">【转载】C简易单文件串口通信</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-06-30 12:10:47 / 修改时间：12:20:16" itemprop="dateCreated datePublished" datetime="2022-06-30T12:10:47+08:00">2022-06-30</time>
+            </span>
+
+          
+            <span id="/2022/06/30/doc_simpleSerial/" class="post-meta-item leancloud_visitors" data-flag-title="【转载】C简易单文件串口通信" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/06/30/doc_simpleSerial/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/06/30/doc_simpleSerial/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<ul>
+<li>简易，能直接跑的单文件串口通信</li>
+<li>若需要使用其他串口，则修改 <strong>UART_DEV</strong></li>
+<li>若需要将其作为函数调用，则需要创建一个子线程</li>
+<li>转载自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wabil/article/details/118610070">https://blog.csdn.net/wabil/article/details/118610070</a></li>
+</ul>
+</blockquote>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span>  <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span>  <span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span>  <span class="string">&quot;termios.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span>  <span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span>  <span class="string">&quot;limits.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span>  <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span>  <span class="string">&quot;time.h&quot;</span></span></span><br><span class="line"> <span class="comment">//===================</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/select.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"> <span class="comment">//===================</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span>   UART_DEV   <span class="string">&quot;/dev/ttyS3&quot;</span> <span class="comment">//根据电脑插入的串口号定义</span></span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> fd =<span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> RxLen=<span class="number">0</span>;</span><br><span class="line">    <span class="type">uint8_t</span> RxBuff[<span class="number">1024</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//==========串口打开============//</span></span><br><span class="line">    fd = <span class="built_in">open</span>(UART_DEV ,O_RDWR|O_NOCTTY);</span><br><span class="line">    <span class="keyword">if</span>(fd&lt;<span class="number">0</span>)&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;COM (%s) Open Fail ! \n&quot;</span>,UART_DEV); <span class="comment">//必须要权限.</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;COM (%s) Open Success ! Watting recv...\n\n&quot;</span>,UART_DEV);</span><br><span class="line">    <span class="comment">//==========配置串口============//</span></span><br><span class="line">    <span class="keyword">struct</span>  <span class="title class_">termios</span> opt;          <span class="comment">//配置串口的属性定义在结构体struct termios中</span></span><br><span class="line">    <span class="built_in">tcgetattr</span>(fd, &amp; opt);         <span class="comment">//获取终端控制属性</span></span><br><span class="line"> </span><br><span class="line">    <span class="built_in">cfsetispeed</span>(&amp; opt, B9600);  <span class="comment">//指定输入波特率(若不设置系统默认9600bps)</span></span><br><span class="line">    <span class="built_in">cfsetospeed</span>(&amp; opt, B9600);  <span class="comment">//指定输出波特率(若不设置系统默认9600bps)</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* c_lflag 本地模式 */</span></span><br><span class="line">    opt.c_cflag &amp;= ~ INPCK;           <span class="comment">//不启用输入奇偶检测</span></span><br><span class="line">    opt.c_cflag |= (CLOCAL |  CREAD); <span class="comment">//CLOCAL忽略 modem 控制线,CREAD打开接受者</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* c_lflag 本地模式 */</span></span><br><span class="line">    opt.c_lflag &amp;= ~(ICANON | ECHO | ECHOE |  ISIG); <span class="comment">//ICANON启用标准模式;ECHO回显输入字符;ECHOE如果同时设置了 ICANON，字符 ERASE 擦除前一个输入字符，WERASE 擦除前一个词;ISIG当接受到字符 INTR, QUIT, SUSP, 或 DSUSP 时，产生相应的信号</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* c_oflag 输出模式 */</span></span><br><span class="line">    opt.c_oflag &amp;= ~ OPOST;             <span class="comment">//OPOST启用具体实现自行定义的输出处理</span></span><br><span class="line">    opt.c_oflag &amp;= ~(ONLCR | OCRNL);    <span class="comment">//ONLCR将输出中的新行符映射为回车-换行,OCRNL将输出中的回车映射为新行符</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* c_iflag 输入模式 */</span></span><br><span class="line">    opt.c_iflag &amp;= ~(ICRNL |  INLCR);          <span class="comment">//ICRNL将输入中的回车翻译为新行 (除非设置了 IGNCR),INLCR将输入中的 NL 翻译为 CR</span></span><br><span class="line">    opt.c_iflag &amp;= ~(IXON | IXOFF | IXANY);    <span class="comment">//IXON启用输出的 XON/XOFF流控制,IXOFF启用输入的 XON/XOFF流控制,IXANY(不属于 POSIX.1；XSI) 允许任何字符来重新开始输出</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* c_cflag 控制模式 */</span></span><br><span class="line">    opt.c_cflag &amp;= ~ CSIZE;     <span class="comment">//字符长度掩码,取值为 CS5, CS6, CS7, 或 CS8,加~就是无</span></span><br><span class="line">    opt.c_cflag |=  CS8;        <span class="comment">//数据宽度是8bit</span></span><br><span class="line">    opt.c_cflag &amp;= ~ CSTOPB;    <span class="comment">//CSTOPB设置两个停止位，而不是一个,加~就是设置一个停止位</span></span><br><span class="line">    opt.c_cflag &amp;= ~ PARENB;    <span class="comment">//PARENB允许输出产生奇偶信息以及输入的奇偶校验,加~就是无校验</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* c_cc[NCCS] 控制字符 */</span></span><br><span class="line">    opt.c_cc[VTIME] = <span class="number">0</span> ;   <span class="comment">//等待数据时间(10秒的倍数),每个单位是0.1秒  若20就是2秒</span></span><br><span class="line">    opt.c_cc[VMIN] = <span class="number">0</span> ;    <span class="comment">//最少可读数据,非规范模式读取时的最小字符数，设为0则为非阻塞，如果设为其它值则阻塞，直到读到到对应的数据,就像一个阀值一样，比如设为8，如果只接收到3个数据，那么它是不会返回的，只有凑齐8个数据后一齐才READ返回，阻塞在那儿</span></span><br><span class="line">    <span class="comment">/* new_cfg.c_cc[VMIN]   =   8;//DATA_LEN;</span></span><br><span class="line"><span class="comment">       new_cfg.c_cc[VTIME]  =   20;//每个单位是0.1秒  20就是2秒</span></span><br><span class="line"><span class="comment">       如果这样设置，就完全阻塞了，只有串口收到至少8个数据才会对READ立即返回，或才少于8个数据时，超时2秒也会有返回</span></span><br><span class="line"><span class="comment">       另外特别注意的是当设置VTIME后，如果read第三个参数小于VMIN ，将会将VMIN 修改为read的第三个参数*/</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/*TCIFLUSH  刷清输入队列</span></span><br><span class="line"><span class="comment">      TCOFLUSH  刷清输出队列</span></span><br><span class="line"><span class="comment">      TCIOFLUSH 刷清输入、输出队列*/</span></span><br><span class="line">    <span class="built_in">tcflush</span>(fd, TCIOFLUSH);         <span class="comment">//刷串口清缓存</span></span><br><span class="line">    <span class="built_in">tcsetattr</span>(fd, TCSANOW, &amp;opt);   <span class="comment">//设置终端控制属性,TCSANOW：不等数据传输完毕就立即改变属性</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//==========串口接收(字符串)============//</span></span><br><span class="line">         <span class="keyword">while</span>( ((RxLen = <span class="built_in">read</span>(fd, RxBuff,<span class="built_in">sizeof</span>(RxBuff))) &gt; <span class="number">0</span>)   )</span><br><span class="line">         &#123;</span><br><span class="line">	       RxBuff[RxLen] = <span class="number">0</span>; </span><br><span class="line">    	   <span class="built_in">printf</span>( <span class="string">&quot;%s&quot;</span>,RxBuff);</span><br><span class="line">         </span><br><span class="line">         &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://121.36.87.89/2022/06/30/doc_imbedded_cashier/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -195,7 +282,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-06-30 10:20:44 / 修改时间：10:44:13" itemprop="dateCreated datePublished" datetime="2022-06-30T10:20:44+08:00">2022-06-30</time>
+              <time title="创建时间：2022-06-30 10:20:44 / 修改时间：12:20:14" itemprop="dateCreated datePublished" datetime="2022-06-30T10:20:44+08:00">2022-06-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -203,7 +290,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">嵌入式</span></a>
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">嵌入式开发</span></a>
                 </span>
             </span>
 
@@ -325,7 +412,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-30 10:44:20" itemprop="dateModified" datetime="2022-06-30T10:44:20+08:00">2022-06-30</time>
+                <time title="修改时间：2022-06-30 12:19:00" itemprop="dateModified" datetime="2022-06-30T12:19:00+08:00">2022-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -559,7 +646,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -572,7 +659,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
